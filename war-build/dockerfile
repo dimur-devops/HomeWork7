@@ -1,8 +1,9 @@
 FROM maven:3.8.2-jdk-11 as maven
 RUN apt-get update
 RUN apt-get install git -y
-RUN mkdir /tmp/homework7
-WORKDIR "/tmp/homework7"
+RUN mkdir /tmp/build
+WORKDIR ~
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-WORKDIR "/tmp/homework7/boxfuse-sample-java-war-hello"
-RUN mvn package
+RUN mvn package -f boxfuse-sample-java-war-hello
+#RUN ls -la boxfuse-sample-java-war-hello/target
+CMD [ "mv -f", "boxfuse-sample-java-war-hello/target/hello-1.0.war", "/tmp/build/" ]
