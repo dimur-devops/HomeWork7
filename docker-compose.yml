@@ -1,0 +1,14 @@
+version: '2'
+services:
+  web:
+    image: tomcat:latest
+    links:
+      - mvn
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./target:/usr/local/tomcat/webapps
+  mvn:
+    build: war-build
+    volumes:
+      - ./target:/tmp/homework7/boxfuse-sample-java-war-hello/
